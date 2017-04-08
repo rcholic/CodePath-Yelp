@@ -52,6 +52,7 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
         var restaurants: [Restaurant] = []
         
         // Default the location to San Francisco
+        // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
         
         if sort != nil {
@@ -65,16 +66,6 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
         if deals != nil {
             parameters["deals_filter"] = deals! as AnyObject?
         }
-
-//        let baseUrl = URL(string: "https://api.yelp.com/v2/")
-        
-//        manager.get("search",
-//                parameters: parameters,
-//                success: { (task: URLSessionDataTask, responseObj) in
-//                    print(responseObj)
-//        }) { (task: URLSessionDataTask?, error: Error) in
-//            print(error)
-//        }
         
         self.get("search", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: Any) in
 //                print("response: \(response)")

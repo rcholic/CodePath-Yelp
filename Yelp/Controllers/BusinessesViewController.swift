@@ -10,54 +10,65 @@ import UIKit
 
 class BusinessesViewController: UIViewController {
     
-    var businesses: [Business]!
+    @IBOutlet weak var tableView: UITableView!
+    
+    let cellIdentifier = "RestaurantCell"
+    
+    var restaurants: [Restaurant] = [] // TODO: pagination in search?
+    
+    var searchSettings = SearchSetting(term: "Chinese")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
-//            
-//            self.businesses = businesses
-//            if let businesses = businesses {
-//                for business in businesses {
-//                    print(business.name!)
-//                    print(business.address!)
-//                }
-//            }
-//            
-//            }
-//        )
-        // categories: ["asianfusion", "burgers"]
-        YelpAPIService.shared.searchWithTerm(term: "Thai", sort: YelpSortMode.bestMatched, categories: nil, deals: nil) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
-            print("restaurants.count: \(restaurants.count)")
+        setupTableview()
+        searchSettings.sortMode = .bestMatched
+        search(settings: searchSettings)
+    }
+    
+    private func search(settings: SearchSetting) {
+        
+        YelpAPIService.shared.searchWithTerm(term: settings.term, sort: settings.sortMode, categories: nil, deals: nil) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
+//            print("restaurants.count: \(restaurants.count)")
+            self.restaurants = restaurants
+            self.tableView.reloadData()
         }
-        
-        /* Example of Yelp search with more search options specified
-         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-         self.businesses = businesses
-         
-         for business in businesses {
-         print(business.name!)
-         print(business.address!)
-         }
-         }
-         */
-        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func setupTableview() {
+        let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
+        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
+        tableView.tableFooterView = UIView() // don't show empt cells
+    }
+}
+
+extension BusinessesViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO:
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension BusinessesViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return restaurants.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
+        
+        cell.restaurant = restaurants[indexPath.row]
+        
+        return cell
+    }
 }
