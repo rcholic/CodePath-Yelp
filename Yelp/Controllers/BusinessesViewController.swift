@@ -15,18 +15,22 @@ class BusinessesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
-            self.businesses = businesses
-            if let businesses = businesses {
-                for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
-                }
-            }
-            
-            }
-        )
+//        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+//            
+//            self.businesses = businesses
+//            if let businesses = businesses {
+//                for business in businesses {
+//                    print(business.name!)
+//                    print(business.address!)
+//                }
+//            }
+//            
+//            }
+//        )
+        // categories: ["asianfusion", "burgers"]
+        YelpAPIService.shared.searchWithTerm(term: "Thai", sort: YelpSortMode.bestMatched, categories: nil, deals: nil) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
+            print("restaurants.count: \(restaurants.count)")
+        }
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
