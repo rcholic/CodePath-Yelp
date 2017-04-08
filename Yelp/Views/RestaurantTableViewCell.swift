@@ -11,16 +11,17 @@ import UIKit
 class RestaurantTableViewCell: UITableViewCell {
 
     @IBOutlet weak var thumbImageView: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var priceyLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var reviewCountLabel: UILabel!
+    @IBOutlet weak var ratingImageView: UIImageView!
     
     var restaurant: Restaurant! {
         didSet {
-            self.thumbImageView.fadeInImageWith(remoteImgUrl: restaurant.imageUrl, placeholderImage: nil)
-            
-            if let name = restaurant.name {
-                self.nameLabel.text = name
-            }
+            self.bind(restaurant)
         }
     }
     
@@ -34,6 +35,38 @@ class RestaurantTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
+    }
+    
+    private func bind(_ restaurant: Restaurant) {
+        
+        self.thumbImageView.fadeInImageWith(remoteImgUrl: restaurant.imageUrl, placeholderImage: nil)
+        
+        if let name = restaurant.name {
+            self.nameLabel.text = name
+        }
+        
+        self.distanceLabel.text = restaurant.distance ?? ""
+        
+        if let urlString = restaurant.ratingImageUrl {
+            self.ratingImageView.setImageWith(URL(string: urlString)!)
+        }
+        
+        var reviewLabelContent = "No Reviews"
+        if let reviewCount = restaurant.reviewCount, reviewCount > 0 {
+            reviewLabelContent = "\(reviewCount) "
+            reviewLabelContent += reviewCount > 1 ? "Reviews" : "Review"
+        }
+        
+        self.reviewCountLabel.text = reviewLabelContent
+        
+        self.addressLabel.text = restaurant.address.joined(separator: ", ")
+        
+        self.categoryLabel.text = restaurant.categories.first?.joined(separator: ", ")
     }
     
 }

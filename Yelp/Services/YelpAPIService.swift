@@ -6,6 +6,15 @@
 //  Copyright © 2017 Timothy Lee. All rights reserved.
 //
 
+// autolayout video II: https://www.youtube.com/watch?v=sgqlFm8vdwo&list=PLrT2tZ9JRrf7p1AoQ0C7APLImJjdUiEbA&index=3
+/*
+ mapview: https://guides.codepath.com/ios/Maps
+ tableview auto height: http://guides.codepath.com/ios/Table-View-Guide#variable-row-height
+ 
+ basic filters: https://www.youtube.com/watch?v=sgqlFm8vdwo&list=PLrT2tZ9JRrf7p1AoQ0C7APLImJjdUiEbA&index=3
+ 
+ */
+
 import AFNetworking
 import SwiftyJSON
 import ObjectMapper

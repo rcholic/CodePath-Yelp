@@ -12,11 +12,19 @@ class BusinessesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var referenceCell: RestaurantTableViewCell!
+    
     let cellIdentifier = "RestaurantCell"
     
     var restaurants: [Restaurant] = [] // TODO: pagination in search?
     
     var searchSettings = SearchSetting(term: "Chinese")
+    
+    private var windowSize: CGSize {
+        get {
+            return self.view.bounds.size
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +45,17 @@ class BusinessesViewController: UIViewController {
     
     private func setupTableview() {
         let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
+        
+//        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: windowSize.width, height: 0.1))
         tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView() // don't show empt cells
+        
+        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
+        referenceCell.frame = tableView.frame // tableView.estimatedRowHeight = 120
     }
 }
 
@@ -57,6 +70,16 @@ extension BusinessesViewController: UITableViewDelegate {
 extension BusinessesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    // automatic height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        referenceCell.restaurant = restaurants[indexPath.row]
+        referenceCell.layoutSubviews()
+        return referenceCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+//        return referenceCell.systemLayoutSizeFitting(CGSize, withHorizontalFittingPriority: UILayoutPriority, verticalFittingPriority: <#T##UILayoutPriority#>)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
