@@ -24,6 +24,8 @@
 		EB27E21C1E9742F5006204F7 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB27E21B1E9742F5006204F7 /* SwiftyJSON.framework */; };
 		EB27E21F1E9743D6006204F7 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27E21E1E9743D6006204F7 /* Restaurant.swift */; };
 		EB27E2211E9743EC006204F7 /* BaseJsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27E2201E9743EC006204F7 /* BaseJsonModel.swift */; };
+		EB5BEC851E993F4800BF68A0 /* CategorySwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BEC831E993F4800BF68A0 /* CategorySwitchCell.swift */; };
+		EB5BEC861E993F4800BF68A0 /* CategorySwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5BEC841E993F4800BF68A0 /* CategorySwitchCell.xib */; };
 		EB6C24E51E992D5000EF12D6 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C24E41E992D5000EF12D6 /* FiltersViewController.swift */; };
 		EB709C8F1E986C6800CA6AA8 /* YelpAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB709C8E1E986C6800CA6AA8 /* YelpAPIService.swift */; };
 		EB709C941E988B8500CA6AA8 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB709C931E988B8500CA6AA8 /* UIImageView+Ext.swift */; };
@@ -69,6 +71,8 @@
 		EB27E21D1E974355006204F7 /* Yelp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yelp-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB27E21E1E9743D6006204F7 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		EB27E2201E9743EC006204F7 /* BaseJsonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseJsonModel.swift; sourceTree = "<group>"; };
+		EB5BEC831E993F4800BF68A0 /* CategorySwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySwitchCell.swift; sourceTree = "<group>"; };
+		EB5BEC841E993F4800BF68A0 /* CategorySwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategorySwitchCell.xib; sourceTree = "<group>"; };
 		EB6C24E41E992D5000EF12D6 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		EB709C8E1E986C6800CA6AA8 /* YelpAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpAPIService.swift; sourceTree = "<group>"; };
 		EB709C931E988B8500CA6AA8 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 			children = (
 				EB709C951E988BB300CA6AA8 /* RestaurantTableViewCell.swift */,
 				EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */,
+				EB5BEC831E993F4800BF68A0 /* CategorySwitchCell.swift */,
+				EB5BEC841E993F4800BF68A0 /* CategorySwitchCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 			files = (
 				EB709C981E988BB300CA6AA8 /* RestaurantTableViewCell.xib in Resources */,
 				222D8A6019CCF9F900D2DB53 /* Main.storyboard in Resources */,
+				EB5BEC861E993F4800BF68A0 /* CategorySwitchCell.xib in Resources */,
 				222D8A6519CCF9F900D2DB53 /* LaunchScreen.xib in Resources */,
 				222D8A6219CCF9F900D2DB53 /* Images.xcassets in Resources */,
 			);
@@ -372,7 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4AE591C62421400E9E10FDCC /* [CP] Embed Pods Frameworks */ = {
@@ -432,7 +439,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -453,6 +460,7 @@
 				EB709C971E988BB300CA6AA8 /* RestaurantTableViewCell.swift in Sources */,
 				EB6C24E51E992D5000EF12D6 /* FiltersViewController.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
+				EB5BEC851E993F4800BF68A0 /* CategorySwitchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
