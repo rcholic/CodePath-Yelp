@@ -8,67 +8,140 @@
 
 import UIKit
 
+@objc protocol FiltersViewControllerDelegate: class {
+    func filtersViewController(filtersViewController: FiltersViewController, searchFilter: YelpFilters?)
+}
+
 class FiltersViewController: UIViewController {
 
-    let categoryCellId = "CategoryCell"
+    let checkedImage = UIImage(named: "checked")
     
+    let uncheckedImage = UIImage(named: "unchecked")
+    
+    let dropdownImage = UIImage(named: "dropDown")
+    
+    var viewModel: YelpFilters?
+    
+    weak var delegate: FiltersViewControllerDelegate?
+
     @IBOutlet weak var tableView: UITableView!
-    
-    fileprivate var categories: [[String:String]] = []
-    
-    fileprivate var selectedStates: [Bool]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories = YelpAPIService.shared.yelpCategories()
-        selectedStates = Array(repeating: false, count: categories.count)
+        if viewModel == nil {
+            viewModel = YelpFilters()
+        }
         setupTableView()
+        self.tableView.reloadData()
     }
     
-    @IBAction func didTapOnCancel(_ sender: Any) {
+    @IBAction func didCancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        delegate?.filtersViewController(filtersViewController: self, searchFilter: nil)
     }
     
     
-    @IBAction func didTapOnSearch(_ sender: Any) {
+    @IBAction func didSearch(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        delegate?.filtersViewController(filtersViewController: self, searchFilter: viewModel)
     }
+    
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        let categoryCellNib = UINib(nibName: "CategorySwitchCell", bundle: Bundle.main)
-        tableView.register(categoryCellNib, forCellReuseIdentifier: categoryCellId)
-        
-        tableView.reloadData()
+        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.reloadData()
     }
 
 }
 
-extension FiltersViewController: UITableViewDataSource, CategorySwitchCellDelegate {
+extension FiltersViewController: UITableViewDataSource {
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 4
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel!.filters.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+
+        let curFilter = viewModel!.filters[section]
+        
+        if curFilter.type == .single {
+            return 1
+        } else if curFilter.type == .dropDown {
+            return curFilter.isCollapsed ? curFilter.options.count : 1
+        }
+
+                // show list
+//        if let numVisibleCells = curFilter.numItemsVisible, numVisibleCells > 0 && numVisibleCells <  curFilter.options.count {
+//            return numVisibleCells + 1
+//        }
+        return curFilter.options.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let curFilter = viewModel!.filters[section]
+        let label = curFilter.label
+        
+        if curFilter.allowMultiSelect && curFilter.numOfSelected > 0 {
+            return "\(label) - \(curFilter.numOfSelected) Selected"
+        }
+        
+        return label
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategorySwitchCell
-        cell.delegate = self
         
-        let category = categories[indexPath.row]
-        cell.countryLabel.text = category["name"]
-        cell.switchButton.isOn = selectedStates[indexPath.row]
+        let section = indexPath.section
+        let curFilter = viewModel!.filters[section]
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.selectionStyle = .none
+//        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+//        cell.contentView.layer.borderWidth = 1.0
+//        cell.contentView.layer.cornerRadius = 3.0
+        
+        let option = curFilter.options[indexPath.row]
+        cell.textLabel?.text = option.label
+        cell.accessoryView = option.isSelected ? UIImageView(image: checkedImage) : UIImageView(image: uncheckedImage)
+
+        if curFilter.type == .dropDown {            
+            if !curFilter.isCollapsed {
+                cell.accessoryView = UIImageView(image: dropdownImage)
+            }
+        } else {
+            // if curFilter.type == .single || curFilter.type == .list
+            
+            if curFilter.cellType == .switchCell {
+                let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+                switchButton.isOn = option.isSelected
+                switchButton.onTintColor = UIColor(red: 73.0/255.0, green: 134.0/255.0, blue: 231.0/255.0, alpha: 1.0)
+                switchButton.tag = indexPath.row // add a tag
+                switchButton.addTarget(self, action: #selector(self.didChangeSwitchValue(sender:)), for: .valueChanged)
+                
+                cell.accessoryView = switchButton
+            }
+        }
+//        cell.layoutSubviews()
+        
         return cell
     }
     
-    func categorySwitchCell(cell: CategorySwitchCell, didChangeValue value: Bool) {
-        if let indexPath = tableView.indexPath(for: cell) {
-            selectedStates[indexPath.row] = value
-            print("toggle value: \(value) for index: \(indexPath.row)")
+    @objc private func didChangeSwitchValue(sender: UISwitch) {
+        
+        if let cell = sender.superview as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+            guard indexPath.section < viewModel!.filters.count else { return }
+            var curFilter = viewModel!.filters[indexPath.section]
+            guard indexPath.row < curFilter.options.count else { return }
+//            curFilter.options[indexPath.row].isSelected = sender.isOn
+            curFilter.selectedIndex = indexPath.row
+
+            var title = "\(curFilter.label) "
+            if curFilter.numOfSelected > 0 {
+                title += ": \(curFilter.numOfSelected) selected"
+            }
+            self.tableView.headerView(forSection: indexPath.section)?.textLabel?.text = "\(title)" // update header title
+            self.tableView.headerView(forSection: indexPath.section)?.textLabel?.sizeToFit()
+            
         }
     }
 }
@@ -77,5 +150,32 @@ extension FiltersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        let section = indexPath.section
+
+        var curFilter = viewModel!.filters[section]
+
+        if curFilter.type == .dropDown {
+            
+            if curFilter.isCollapsed {
+                curFilter.selectedIndex = indexPath.row
+                
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+                print("reloading row: \(indexPath.row) in section: \(section)")
+                let selected = curFilter.options.filter {
+                    return $0.isSelected
+                }.count
+                print("selected count: \(selected)")
+                // close dropdown
+                curFilter.isCollapsed = false
+            } else {
+                curFilter.isCollapsed = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                self.tableView.reloadSections([section], with: .automatic)
+                self.tableView.reloadData()
+            })
+        }
     }
 }

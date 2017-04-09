@@ -62,6 +62,36 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func searchWithParams(term: String?, params: [String: AnyObject], completionCallback: @escaping CompletionHandler) {
+        
+        let keyTerm = term ?? ""
+        var parameters = params
+        parameters["ll"] = "37.785771,-122.406165" as AnyObject
+        parameters["term"] = keyTerm as AnyObject // add the term field
+        parameters["radius_filter"] = 1600 as AnyObject
+        var restaurants: [Restaurant] = []
+        
+        self.get("search", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: Any) in
+            //                print("response: \(response)")
+            let json = JSON(response)
+            let businesses = json["businesses"].arrayObject
+            if let data = Mapper<Restaurant>().mapArray(JSONObject: businesses) {
+                restaurants = data
+                print("converted restaurants first address: \(restaurants.first?.address.joined(separator: ", "))")
+                completionCallback(restaurants, nil, nil)
+            }
+            
+        }) { (operation: AFHTTPRequestOperation?, error: Error) in
+            print("error: \(error)")
+            var statusCode = 400
+            if let res = operation?.response {
+                statusCode = res.statusCode
+            }
+            completionCallback(restaurants, error.localizedDescription, statusCode)
+        }
+        
+    }
+    
     func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completionCallback: @escaping CompletionHandler) {
         
         var restaurants: [Restaurant] = []
@@ -75,12 +105,14 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
         }
         
         if categories != nil && categories!.count > 0 {
-            parameters["category_filter"] = (categories!).joined(separator: ",") as AnyObject?
+            parameters["category_filter"] = categories!.joined(separator: ",") as AnyObject?
         }
         
         if deals != nil {
             parameters["deals_filter"] = deals! as AnyObject?
         }
+        
+        print("params: \(parameters)")
         
         self.get("search", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: Any) in
 //                print("response: \(response)")

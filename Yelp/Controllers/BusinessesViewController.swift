@@ -16,9 +16,13 @@ class BusinessesViewController: UIViewController {
     
     let cellIdentifier = "RestaurantCell"
     
+    var searchTerm: String = "Japanese"
+    
     var restaurants: [Restaurant] = [] // TODO: pagination in search?
     
     var searchSettings = SearchSetting(term: "Chinese")
+    
+    var searchFilter = YelpFilters()
     
     private var windowSize: CGSize {
         get {
@@ -31,10 +35,18 @@ class BusinessesViewController: UIViewController {
         
         setupTableview()
         searchSettings.sortMode = .bestMatched
-        search(settings: searchSettings)
+//        search(settings: searchSettings)
+        search(term: searchTerm, params: searchFilter.parameters)
     }
     
-    private func search(settings: SearchSetting) {
+    fileprivate func search(term: String, params: [String: AnyObject]) {
+        YelpAPIService.shared.searchWithParams(term: term, params: params) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
+            self.restaurants = restaurants
+            self.tableView.reloadData()
+        }
+    }
+    
+    fileprivate func search(settings: SearchSetting) {
         
         YelpAPIService.shared.searchWithTerm(term: settings.term, sort: settings.sortMode, categories: nil, deals: nil) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
 //            print("restaurants.count: \(restaurants.count)")
@@ -56,6 +68,21 @@ class BusinessesViewController: UIViewController {
         
         referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
         referenceCell.frame = tableView.frame // tableView.estimatedRowHeight = 120
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let filtersVC = segue.destination as? FiltersViewController {
+//            print("preparing segue!")
+//            filtersVC.delegate = self
+//            filtersVC.viewModel = searchFilter // pass in the current one
+//        }
+        if segue.destination is UINavigationController {
+            let navVC = segue.destination as! UINavigationController
+            if let filtersVC = navVC.viewControllers.first, let targetVC = filtersVC as? FiltersViewController {
+                targetVC.delegate = self
+                targetVC.viewModel = searchFilter
+            }
+        }
     }
 }
 
@@ -93,5 +120,18 @@ extension BusinessesViewController: UITableViewDataSource {
         cell.restaurant = restaurants[indexPath.row]
         
         return cell
+    }
+}
+
+extension BusinessesViewController: FiltersViewControllerDelegate {
+    func filtersViewController(filtersViewController: FiltersViewController, searchFilter: YelpFilters?) {
+        if let filter = searchFilter {
+            self.searchFilter = filter // update it
+            let params = self.searchFilter.parameters
+            
+            print("filter: \(params as [String: AnyObject])")
+            
+            search(term: searchTerm, params: params)
+        }
     }
 }
