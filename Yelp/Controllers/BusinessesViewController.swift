@@ -40,7 +40,7 @@ class BusinessesViewController: UIViewController {
             self.restaurants = restaurants
             self.tableView.reloadData()
         }
-    } 
+    }
     
     private func setupTableview() {
         let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)

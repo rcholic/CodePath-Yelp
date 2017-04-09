@@ -35,11 +35,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="C5d-AK-zTF">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="LLI-zG-eel">
+                        <barButtonItem key="leftBarButtonItem" image="filter_icon" id="LLI-zG-eel">
                             <connections>
                                 <segue destination="Sdd-Jk-Jes" kind="presentation" id="0Uy-XM-9Rn"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="map_icon" id="0i9-7g-tPN"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lla-MA-icA" id="jak-Dt-3wj"/>
@@ -131,4 +132,8 @@
             <point key="canvasLocation" x="1264.8" y="1.3493253373313345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="filter_icon" width="17" height="16"/>
+        <image name="map_icon" width="16" height="16"/>
+    </resources>
 </document>

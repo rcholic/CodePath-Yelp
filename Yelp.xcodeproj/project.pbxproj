@@ -33,6 +33,7 @@
 		EB709C981E988BB300CA6AA8 /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */; };
 		EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7184491E9A7C25009DDEAF /* Location.swift */; };
 		EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844B1E9AD3FF009DDEAF /* Option.swift */; };
+		EB71844E1E9AD4DF009DDEAF /* CommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantTableViewCell.xib; sourceTree = "<group>"; };
 		EB7184491E9A7C25009DDEAF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EB71844B1E9AD3FF009DDEAF /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSettings.swift; sourceTree = "<group>"; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 				222D8A6319CCF9F900D2DB53 /* LaunchScreen.xib */,
 				222D8A5819CCF9F900D2DB53 /* Supporting Files */,
 				EB6C25001E99A90700EF12D6 /* Main.storyboard */,
+				EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */,
 			);
 			path = Yelp;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				EB709C8F1E986C6800CA6AA8 /* YelpAPIService.swift in Sources */,
 				EB27E21F1E9743D6006204F7 /* Restaurant.swift in Sources */,
 				EB27E2111E9742BE006204F7 /* YelpClient.swift in Sources */,
+				EB71844E1E9AD4DF009DDEAF /* CommonSettings.swift in Sources */,
 				EB27E2211E9743EC006204F7 /* BaseJsonModel.swift in Sources */,
 				EB27E20E1E9742B8006204F7 /* Business.swift in Sources */,
 				EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */,

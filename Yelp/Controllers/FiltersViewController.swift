@@ -14,12 +14,6 @@ import UIKit
 
 class FiltersViewController: UIViewController {
 
-    let checkedImage = UIImage(named: "checked")
-    
-    let uncheckedImage = UIImage(named: "unchecked")
-    
-    let dropdownImage = UIImage(named: "dropDown")
-    
     var viewModel: YelpFilters?
     
     weak var delegate: FiltersViewControllerDelegate?
@@ -31,6 +25,7 @@ class FiltersViewController: UIViewController {
         if viewModel == nil {
             viewModel = YelpFilters()
         }
+
         setupTableView()
         self.tableView.reloadData()
     }
@@ -45,7 +40,6 @@ class FiltersViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         delegate?.filtersViewController(filtersViewController: self, searchFilter: viewModel)
     }
-    
     
     private func setupTableView() {
         tableView.delegate = self
