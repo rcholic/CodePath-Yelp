@@ -31,7 +31,8 @@
 		EB709C941E988B8500CA6AA8 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB709C931E988B8500CA6AA8 /* UIImageView+Ext.swift */; };
 		EB709C971E988BB300CA6AA8 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB709C951E988BB300CA6AA8 /* RestaurantTableViewCell.swift */; };
 		EB709C981E988BB300CA6AA8 /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */; };
-		EB709C9A1E988C1E00CA6AA8 /* SearchSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB709C991E988C1E00CA6AA8 /* SearchSetting.swift */; };
+		EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7184491E9A7C25009DDEAF /* Location.swift */; };
+		EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844B1E9AD3FF009DDEAF /* Option.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +79,8 @@
 		EB709C931E988B8500CA6AA8 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		EB709C951E988BB300CA6AA8 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantTableViewCell.xib; sourceTree = "<group>"; };
-		EB709C991E988C1E00CA6AA8 /* SearchSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSetting.swift; sourceTree = "<group>"; };
+		EB7184491E9A7C25009DDEAF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		EB71844B1E9AD3FF009DDEAF /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,9 +202,10 @@
 				EB27E20D1E9742B8006204F7 /* Business.swift */,
 				EB27E21E1E9743D6006204F7 /* Restaurant.swift */,
 				EB27E2201E9743EC006204F7 /* BaseJsonModel.swift */,
-				EB709C991E988C1E00CA6AA8 /* SearchSetting.swift */,
 				EB6C24E61E9957CF00EF12D6 /* Filter.swift */,
 				EB6C24E81E995F4300EF12D6 /* YelpFilters.swift */,
+				EB7184491E9A7C25009DDEAF /* Location.swift */,
+				EB71844B1E9AD3FF009DDEAF /* Option.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,7 +457,8 @@
 				EB27E2111E9742BE006204F7 /* YelpClient.swift in Sources */,
 				EB27E2211E9743EC006204F7 /* BaseJsonModel.swift in Sources */,
 				EB27E20E1E9742B8006204F7 /* Business.swift in Sources */,
-				EB709C9A1E988C1E00CA6AA8 /* SearchSetting.swift in Sources */,
+				EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */,
+				EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */,
 				EB27E20B1E9742B1006204F7 /* BusinessesViewController.swift in Sources */,
 				EB709C971E988BB300CA6AA8 /* RestaurantTableViewCell.swift in Sources */,
 				EB6C24E51E992D5000EF12D6 /* FiltersViewController.swift in Sources */,

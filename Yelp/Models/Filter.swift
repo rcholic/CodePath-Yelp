@@ -33,27 +33,30 @@ internal struct Filter {
     var isCollapsed: Bool = false
     var _lastSelected: Int = -1
     
-    // MARK: toggle the selected index
+    // MARK: toggle the selected index of options
     var selectedIndex: Int = -1 {
 
         didSet {
             guard selectedIndex < self.options.count && selectedIndex > -1 else { return }
+            var oldOption = self.options[selectedIndex]
             
             if self.allowMultiSelect {
-                self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
+                self.options[selectedIndex].toggle()
+//                self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
             } else {
                 
-                let oldOption = self.options[selectedIndex]
                 if oldOption.isSelected {
-                    self.options[selectedIndex].isSelected = !oldOption.isSelected
+                    self.options[selectedIndex].toggle()
+//                    self.options[selectedIndex].isSelected = !oldOption.isSelected
                 } else {
                     // see if any selected row, if yes, uncheck it -> make sure only one is selected at a time
                     for (index, _) in self.options.enumerated() {
                         if self.options[index].isSelected {
-                            self.options[index].isSelected = false
+                            self.options[index].toggle()
                         }
                     }
-                    self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
+                    self.options[selectedIndex].toggle()
+//                    self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
                 }
             }
             
@@ -64,12 +67,11 @@ internal struct Filter {
     
     var numOfSelected: Int {
         get {
-            return self.options.filter {
-                return $0.isSelected
-            }.count
+//            return self.options.filter {
+//                return $0.isSelected
+//            }.count
             
-//            return self.options.reduce(0) { return $0 + ($1.isSelected ? 1 : 0) }
-
+            return self.options.reduce(0) { return $0 + ($1.isSelected ? 1 : 0) }
         }
     }
     
@@ -85,45 +87,18 @@ internal struct Filter {
         self.cellType = cellType        
     }
     
+    internal mutating func changeOption(at index: Int, to value: Bool) -> Filter {
+        guard index >= 0 && index < self.options.count else {
+            return self
+        }
+        var option = options[index]
+        self.options[index] = option.change(selected: value)
+        return self
+    }
+    
     internal func getSelectedOptions() -> [Option] {
         return self.options.filter {
             return $0.isSelected
         }
     }
 }
-
-//internal struct Option {
-//    
-//    let label: String
-//    let value: String
-//    var isSelected: Bool
-//    
-//    init(label: String, value: String, isSelected: Bool) {
-//        
-//        self.label = label
-//        self.value = value
-//        self.isSelected = isSelected
-//    }
-//    
-//    mutating func toggleSelection() -> Option {
-//        self.isSelected = !isSelected
-//        
-//        return self
-//    }
-//}
-
-internal class Option: NSObject {
-    
-    let label: String
-    let value: String
-    var isSelected: Bool
-    
-    init(label: String, value: String, isSelected: Bool) {
-        
-        self.label = label
-        self.value = value
-        self.isSelected = isSelected
-        super.init()
-    }
-}
-

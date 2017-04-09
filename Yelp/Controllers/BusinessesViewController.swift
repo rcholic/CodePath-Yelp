@@ -20,8 +20,6 @@ class BusinessesViewController: UIViewController {
     
     var restaurants: [Restaurant] = [] // TODO: pagination in search?
     
-    var searchSettings = SearchSetting(term: "Chinese")
-    
     var searchFilter = YelpFilters()
     
     private var windowSize: CGSize {
@@ -34,8 +32,6 @@ class BusinessesViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableview()
-        searchSettings.sortMode = .bestMatched
-//        search(settings: searchSettings)
         search(term: searchTerm, params: searchFilter.parameters)
     }
     
@@ -44,16 +40,7 @@ class BusinessesViewController: UIViewController {
             self.restaurants = restaurants
             self.tableView.reloadData()
         }
-    }
-    
-    fileprivate func search(settings: SearchSetting) {
-        
-        YelpAPIService.shared.searchWithTerm(term: settings.term, sort: settings.sortMode, categories: nil, deals: nil) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
-//            print("restaurants.count: \(restaurants.count)")
-            self.restaurants = restaurants
-            self.tableView.reloadData()
-        }
-    }
+    } 
     
     private func setupTableview() {
         let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)

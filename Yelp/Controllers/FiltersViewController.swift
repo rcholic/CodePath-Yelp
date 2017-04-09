@@ -65,9 +65,6 @@ extension FiltersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         let curFilter = viewModel!.filters[section]
-        
-//        print("updating section: \(section), curFilter: \(curFilter.label), numSelected: \(curFilter.numOfSelected)")
-        
         if curFilter.type == .single {
             return 1
         } else if curFilter.type == .dropDown {
@@ -86,7 +83,7 @@ extension FiltersViewController: UITableViewDataSource {
         let label = curFilter.label
         
         if curFilter.allowMultiSelect && curFilter.numOfSelected > 0 {
-            return "\(label) - \(curFilter.numOfSelected) Selected"
+            return "\(label): \(curFilter.numOfSelected) Selected"
         }
         
         return label
@@ -133,13 +130,14 @@ extension FiltersViewController: UITableViewDataSource {
             guard indexPath.section < viewModel!.filters.count else { return }
             let curFilter = viewModel!.filters[indexPath.section]
             guard indexPath.row < curFilter.options.count else { return }
-//            curFilter.options[indexPath.row].isSelected = sender.isOn
+//            curFilter = curFilter.changeOption(at: indexPath.row, to: sender.isOn) // does not work right
             viewModel!.filters[indexPath.section].selectedIndex = indexPath.row
 
-            var title = "\(curFilter.label) "
-            if curFilter.numOfSelected > 0 {
-                title += ": \(curFilter.numOfSelected) selected"
-            }
+            var title = "\(curFilter.label)"
+            let numSelected = viewModel!.filters[indexPath.section].numOfSelected
+//            let numSelected = curFilter.numOfSelected
+            title += numSelected > 0 ? ": \(numSelected) Selected" : ""
+
             self.tableView.headerView(forSection: indexPath.section)?.textLabel?.text = "\(title)" // update header title
             self.tableView.headerView(forSection: indexPath.section)?.textLabel?.sizeToFit()
             
