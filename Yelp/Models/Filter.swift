@@ -39,27 +39,23 @@ internal struct Filter {
         didSet {
             guard selectedIndex < self.options.count && selectedIndex > -1 else { return }
             
-            self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
-            
-//            if self.allowMultiSelect {
-//                self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
-//            } else {
-//                
-//                let oldOption = self.options[selectedIndex]
-//                if oldOption.isSelected {
-//                    self.options[selectedIndex].isSelected = !oldOption.isSelected
-//                } else {
-//                    // see if any selected row
-//                    let selectedOptions = self.options.filter {
-//                        return $0.isSelected
-//                    }
-//                    for (index, _) in selectedOptions.enumerated() {
-//                        selectedOptions[index].isSelected = false
-//                    }
-//                    
-//                    self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
-//                }
-//            }
+            if self.allowMultiSelect {
+                self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
+            } else {
+                
+                let oldOption = self.options[selectedIndex]
+                if oldOption.isSelected {
+                    self.options[selectedIndex].isSelected = !oldOption.isSelected
+                } else {
+                    // see if any selected row, if yes, uncheck it -> make sure only one is selected at a time
+                    for (index, _) in self.options.enumerated() {
+                        if self.options[index].isSelected {
+                            self.options[index].isSelected = false
+                        }
+                    }
+                    self.options[selectedIndex].isSelected = !self.options[selectedIndex].isSelected
+                }
+            }
             
             _lastSelected = selectedIndex
             print("num of selection: \(self.numOfSelected)")

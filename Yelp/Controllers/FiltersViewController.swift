@@ -66,6 +66,8 @@ extension FiltersViewController: UITableViewDataSource {
 
         let curFilter = viewModel!.filters[section]
         
+//        print("updating section: \(section), curFilter: \(curFilter.label), numSelected: \(curFilter.numOfSelected)")
+        
         if curFilter.type == .single {
             return 1
         } else if curFilter.type == .dropDown {
@@ -121,7 +123,6 @@ extension FiltersViewController: UITableViewDataSource {
                 cell.accessoryView = switchButton
             }
         }
-//        cell.layoutSubviews()
         
         return cell
     }
@@ -130,10 +131,10 @@ extension FiltersViewController: UITableViewDataSource {
         
         if let cell = sender.superview as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             guard indexPath.section < viewModel!.filters.count else { return }
-            var curFilter = viewModel!.filters[indexPath.section]
+            let curFilter = viewModel!.filters[indexPath.section]
             guard indexPath.row < curFilter.options.count else { return }
 //            curFilter.options[indexPath.row].isSelected = sender.isOn
-            curFilter.selectedIndex = indexPath.row
+            viewModel!.filters[indexPath.section].selectedIndex = indexPath.row
 
             var title = "\(curFilter.label) "
             if curFilter.numOfSelected > 0 {
@@ -152,29 +153,27 @@ extension FiltersViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         
         let section = indexPath.section
-
         var curFilter = viewModel!.filters[section]
 
         if curFilter.type == .dropDown {
             
             if curFilter.isCollapsed {
-                curFilter.selectedIndex = indexPath.row
-                
+                viewModel!.filters[section].selectedIndex = indexPath.row
                 tableView.reloadRows(at: [indexPath], with: .automatic)
-                print("reloading row: \(indexPath.row) in section: \(section)")
-                let selected = curFilter.options.filter {
-                    return $0.isSelected
-                }.count
-                print("selected count: \(selected)")
-                // close dropdown
-                curFilter.isCollapsed = false
+                
+                if viewModel!.filters[section].numOfSelected > 0 {
+                    // close dropdown when one option is selected
+                    viewModel!.filters[section].isCollapsed = false
+                }
             } else {
-                curFilter.isCollapsed = true
+                // collapse dropdown
+                viewModel!.filters[section].selectedIndex = -1 // do not unselect the first option by setting -1 here
+                viewModel!.filters[section].isCollapsed = true
+                
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.tableView.reloadSections([section], with: .automatic)
-                self.tableView.reloadData()
             })
         }
     }
