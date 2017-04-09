@@ -21,17 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lla-MA-icA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="85g-Pd-R5x">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="lla-MA-icA" secondAttribute="trailing" id="2so-DV-baG"/>
-                            <constraint firstItem="lla-MA-icA" firstAttribute="top" secondItem="SBx-Rl-R7e" secondAttribute="bottom" id="LU6-Bz-1Zl"/>
-                            <constraint firstItem="lla-MA-icA" firstAttribute="leading" secondItem="mot-r1-B5k" secondAttribute="leading" id="deO-vh-sZs"/>
-                            <constraint firstItem="UW7-SB-2gO" firstAttribute="top" secondItem="lla-MA-icA" secondAttribute="bottom" id="kUg-ER-G0K"/>
+                            <constraint firstAttribute="trailing" secondItem="85g-Pd-R5x" secondAttribute="trailing" id="Tju-qp-bFE"/>
+                            <constraint firstItem="85g-Pd-R5x" firstAttribute="leading" secondItem="mot-r1-B5k" secondAttribute="leading" id="ijw-Yd-Rm6"/>
+                            <constraint firstItem="UW7-SB-2gO" firstAttribute="top" secondItem="85g-Pd-R5x" secondAttribute="bottom" id="wZU-f8-Muz"/>
+                            <constraint firstItem="85g-Pd-R5x" firstAttribute="top" secondItem="SBx-Rl-R7e" secondAttribute="bottom" id="yUE-wt-qIo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="C5d-AK-zTF">
@@ -43,7 +43,9 @@
                         <barButtonItem key="rightBarButtonItem" image="map_icon" id="0i9-7g-tPN"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="lla-MA-icA" id="jak-Dt-3wj"/>
+                        <outlet property="filterButton" destination="LLI-zG-eel" id="BqZ-Dc-Kgp"/>
+                        <outlet property="mapButton" destination="0i9-7g-tPN" id="GWW-ZH-PBg"/>
+                        <outlet property="tableView" destination="85g-Pd-R5x" id="FLj-74-xFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Z7-Pw-QH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -133,7 +135,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="filter_icon" width="17" height="16"/>
+        <image name="filter_icon" width="16" height="16"/>
         <image name="map_icon" width="16" height="16"/>
     </resources>
 </document>

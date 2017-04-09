@@ -34,6 +34,7 @@
 		EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7184491E9A7C25009DDEAF /* Location.swift */; };
 		EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844B1E9AD3FF009DDEAF /* Option.swift */; };
 		EB71844E1E9AD4DF009DDEAF /* CommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */; };
+		EB7184521E9ADBEB009DDEAF /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7184511E9ADBEB009DDEAF /* SnapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		EB7184491E9A7C25009DDEAF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EB71844B1E9AD3FF009DDEAF /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSettings.swift; sourceTree = "<group>"; };
+		EB7184511E9ADBEB009DDEAF /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/Yelp-byrlwyqxzqxecrgkeobzufivlwxo/Build/Products/Debug-iphonesimulator/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7184521E9ADBEB009DDEAF /* SnapKit.framework in Frameworks */,
 				EB27E21C1E9742F5006204F7 /* SwiftyJSON.framework in Frameworks */,
 				EB27E21A1E9742F1006204F7 /* SVProgressHUD.framework in Frameworks */,
 				EB27E2181E9742EA006204F7 /* ObjectMapper.framework in Frameworks */,
@@ -178,6 +181,7 @@
 		4A7CA25ACD374CA0AC966A24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB7184511E9ADBEB009DDEAF /* SnapKit.framework */,
 				EB27E21B1E9742F5006204F7 /* SwiftyJSON.framework */,
 				EB27E2191E9742F1006204F7 /* SVProgressHUD.framework */,
 				EB27E2171E9742EA006204F7 /* ObjectMapper.framework */,
@@ -384,7 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4AE591C62421400E9E10FDCC /* [CP] Embed Pods Frameworks */ = {
@@ -444,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

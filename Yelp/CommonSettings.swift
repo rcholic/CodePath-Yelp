@@ -18,6 +18,8 @@ public let YELP_NAVBAR_TEXT_COLOR: UIColor = .white
 
 public let YELP_RED: UIColor = RGBA(r: 211/255.0, g: 35/255.0, b: 35/255.0, alpha: 1)
 
+public let NAVBAR_HEIGHT: CGFloat = 50.0
+
 public func RGBA(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat) -> UIColor {
     return UIColor(red: r, green: g, blue: b, alpha: alpha)
 }

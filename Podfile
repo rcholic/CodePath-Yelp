@@ -11,6 +11,7 @@ target 'Yelp' do
   pod 'ObjectMapper', '~> 2.2'
   pod 'SwiftyJSON'
   pod 'SVProgressHUD'
+  pod 'SnapKit', '~> 3.2.0'
 
   target 'YelpTests' do
     inherit! :search_paths
