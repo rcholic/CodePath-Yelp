@@ -35,6 +35,8 @@
 		EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844B1E9AD3FF009DDEAF /* Option.swift */; };
 		EB71844E1E9AD4DF009DDEAF /* CommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */; };
 		EB7184521E9ADBEB009DDEAF /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7184511E9ADBEB009DDEAF /* SnapKit.framework */; };
+		EB7184551E9B0EA7009DDEAF /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7184531E9B0EA7009DDEAF /* BusinessCell.swift */; };
+		EB7184561E9B0EA7009DDEAF /* BusinessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB7184541E9B0EA7009DDEAF /* BusinessCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 		EB71844B1E9AD3FF009DDEAF /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		EB71844D1E9AD4DF009DDEAF /* CommonSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSettings.swift; sourceTree = "<group>"; };
 		EB7184511E9ADBEB009DDEAF /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/Yelp-byrlwyqxzqxecrgkeobzufivlwxo/Build/Products/Debug-iphonesimulator/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
+		EB7184531E9B0EA7009DDEAF /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
+		EB7184541E9B0EA7009DDEAF /* BusinessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessCell.xib; sourceTree = "<group>"; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +235,8 @@
 			children = (
 				EB709C951E988BB300CA6AA8 /* RestaurantTableViewCell.swift */,
 				EB709C961E988BB300CA6AA8 /* RestaurantTableViewCell.xib */,
+				EB7184531E9B0EA7009DDEAF /* BusinessCell.swift */,
+				EB7184541E9B0EA7009DDEAF /* BusinessCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7184561E9B0EA7009DDEAF /* BusinessCell.xib in Resources */,
 				EB709C981E988BB300CA6AA8 /* RestaurantTableViewCell.xib in Resources */,
 				222D8A6519CCF9F900D2DB53 /* LaunchScreen.xib in Resources */,
 				222D8A6219CCF9F900D2DB53 /* Images.xcassets in Resources */,
@@ -467,6 +474,7 @@
 				EB27E20E1E9742B8006204F7 /* Business.swift in Sources */,
 				EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */,
 				EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */,
+				EB7184551E9B0EA7009DDEAF /* BusinessCell.swift in Sources */,
 				EB27E20B1E9742B1006204F7 /* BusinessesViewController.swift in Sources */,
 				EB709C971E988BB300CA6AA8 /* RestaurantTableViewCell.swift in Sources */,
 				EB6C24E51E992D5000EF12D6 /* FiltersViewController.swift in Sources */,
@@ -608,6 +616,7 @@
 					"$(PROJECT_DIR)/build/Release-iphoneos/SwiftyJSON",
 				);
 				INFOPLIST_FILE = Yelp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codepath.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -632,6 +641,7 @@
 					"$(PROJECT_DIR)/build/Release-iphoneos/SwiftyJSON",
 				);
 				INFOPLIST_FILE = Yelp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codepath.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

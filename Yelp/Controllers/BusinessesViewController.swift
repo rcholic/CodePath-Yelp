@@ -32,9 +32,10 @@ class BusinessesViewController: UIViewController {
     
     fileprivate let searchIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-    fileprivate let cellIdentifier = "RestaurantCell"
+//    fileprivate let cellIdentifier = "RestaurantCell"
+    fileprivate let cellIdentifier = "BusinessCell"
     
-    fileprivate var referenceCell: RestaurantTableViewCell!
+    fileprivate var referenceCell: BusinessCell!
     
     fileprivate var searchTerm: String = "Chinese"
     
@@ -107,8 +108,12 @@ class BusinessesViewController: UIViewController {
     
     private func setupTableview() {
         
-        let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
+//        let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
+//        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        
+        let cellNib = UINib(nibName: "BusinessCell", bundle: Bundle.main)
         tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 120
@@ -118,7 +123,8 @@ class BusinessesViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.loadMoreData(sender:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
-        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
+//        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
+        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! BusinessCell!
         referenceCell.frame = tableView.frame // tableView.estimatedRowHeight = 120
     }
     
@@ -166,7 +172,7 @@ extension BusinessesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BusinessCell
         
         cell.restaurant = restaurants[indexPath.row]
         

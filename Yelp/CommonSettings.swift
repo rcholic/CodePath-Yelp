@@ -8,11 +8,11 @@
 
 import UIKit
 
-public let checkedImage = UIImage(named: "checked")
+public let checkedImage = UIImage(named: "checked")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 
-public let uncheckedImage = UIImage(named: "unchecked")
+public let uncheckedImage = UIImage(named: "unchecked")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 
-public let dropdownImage = UIImage(named: "dropDown")
+public let dropdownImage = UIImage(named: "dropDown2")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 
 public let YELP_NAVBAR_TEXT_COLOR: UIColor = .white
 

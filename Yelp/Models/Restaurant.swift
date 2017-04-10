@@ -47,9 +47,9 @@ class Restaurant: BaseJsonModel {
                 addr += [neighborhood ?? ""]
             }
             
-            if let city = locatedAt.city {
-                addr += [city]
-            }
+//            if let city = locatedAt.city {
+//                addr += [city]
+//            }
             
 //            if let state = locatedAt.stateCode {
 //                result += " \(state) \(locatedAt.postalCode ?? "")\n"

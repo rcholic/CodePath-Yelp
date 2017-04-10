@@ -89,17 +89,21 @@ extension FiltersViewController: UITableViewDataSource {
         let curFilter = viewModel!.filters[section]
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.selectionStyle = .none
-//        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-//        cell.contentView.layer.borderWidth = 1.0
-//        cell.contentView.layer.cornerRadius = 3.0
+        
+        let checkedImageView = UIImageView(image: checkedImage)
+        checkedImageView.tintColor = YELP_RED.withAlphaComponent(0.8)
+        let uncheckedImageImageView = UIImageView(image: uncheckedImage)
+        uncheckedImageImageView.tintColor = UIColor.lightGray
         
         let option = curFilter.options[indexPath.row]
         cell.textLabel?.text = option.label
-        cell.accessoryView = option.isSelected ? UIImageView(image: checkedImage) : UIImageView(image: uncheckedImage)
+        cell.accessoryView = option.isSelected ? checkedImageView : uncheckedImageImageView
 
         if curFilter.type == .dropDown {            
             if !curFilter.isCollapsed {
-                cell.accessoryView = UIImageView(image: dropdownImage)
+                let dropDownImageView = UIImageView(image: dropdownImage)
+                dropDownImageView.tintColor = YELP_RED.withAlphaComponent(0.8)
+                cell.accessoryView = dropDownImageView
             }
         } else {
             // if curFilter.type == .single || curFilter.type == .list
