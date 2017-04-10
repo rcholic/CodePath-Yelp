@@ -55,7 +55,7 @@ Here's a walkthrough of implemented user stories:
 
 ## Notes
 
-The only challenge I encountered is the mistyping of the "distance" field in the Yelp API response. I first thought it was String type, but I keep seeing nothing showing up for the distance cell in the UITableView cell. It look me hours to find out the cause. It should be *Float* type, but I kept thinking why the distance UILabel got pushed out of the cell - duh!
+The only challenge I encountered is the mistyping of the "distance" field in the Yelp API response. I first thought it was String type, but I keep seeing nothing showing up for the distance label in the UITableView cell. It look me hours to find out the cause. It should be *Float* type, but I kept thinking why the distance UILabel got pushed out of the cell - duh!
 
 ## License
 
