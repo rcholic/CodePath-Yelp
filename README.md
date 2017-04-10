@@ -47,7 +47,10 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+
 ![](./screencast/screen1.gif)
+
+![](./screencast/screen2.gif)
 
 
 ## Notes
