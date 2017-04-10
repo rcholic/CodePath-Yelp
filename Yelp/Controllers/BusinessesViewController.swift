@@ -17,21 +17,30 @@ class BusinessesViewController: UIViewController {
     
     @IBOutlet weak var mapButton: UIBarButtonItem!
     
+    fileprivate let refreshControl = UIRefreshControl()
+    
     fileprivate let searchBar = UISearchBar()
+    
+    fileprivate var searchFilter = YelpFilters() {
+        didSet {
+            if oldValue != searchFilter {
+                print("resetting offset")
+                offset = 0 // reset offset
+            }
+        }
+    }
     
     fileprivate let searchIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     fileprivate let cellIdentifier = "RestaurantCell"
     
-//    fileprivate var titleViewWidth: CGFloat!
-    
     fileprivate var referenceCell: RestaurantTableViewCell!
     
     fileprivate var searchTerm: String = "Chinese"
     
-    fileprivate var restaurants: [Restaurant] = [] // TODO: pagination in search?
+    fileprivate var offset: Int = 0 // offset search results
     
-    fileprivate var searchFilter = YelpFilters()
+    fileprivate var restaurants: [Restaurant] = [] // TODO: pagination in search?
     
     typealias stopIndicatorCallback = () -> Void
     
@@ -40,27 +49,36 @@ class BusinessesViewController: UIViewController {
         
         setupSearchBar()
         setupTableview()
-        search(term: searchTerm, params: searchFilter.parameters, callback: nil)
+//        search(term: searchTerm, params: searchFilter.parameters, callback: nil)
+        searchYelp(sender: nil)
     }
     
     @objc fileprivate func searchYelp(sender: AnyObject?) {
-
-        // TODO: searchTerm should not be nil or empty?
+        
+        var searchParams = searchFilter.parameters
+        if offset > 0 {
+            searchParams["offset"] = offset as AnyObject
+        } else {
+            searchParams.removeValue(forKey: "offset")
+        }
         
         var callback: stopIndicatorCallback? = nil
         if let fromSender = sender, fromSender is UISearchBar {
-            // if sender if the searchBar, pass in callback so as to stop the spinner
+            // callback to stop the spinner
+            offset = 0 // reset for new search
             callback = {
                 self.searchIndicator.stopAnimating()
             }
         }
-        search(term: searchTerm, params: searchFilter.parameters, callback: callback)
+        search(term: searchTerm, params: searchParams, callback: callback)
     }
     
     // MARK: working horse for making the search call
     private func search(term: String, params: [String: AnyObject], callback: stopIndicatorCallback?) {
         YelpAPIService.shared.searchWithParams(term: term, params: params) { (restaurants: [Restaurant], errorStr: String?, statusCode: Int?) in
+            // TODO: warning when there's no more restaurants
             self.restaurants = restaurants
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
             
             if let cb = callback {
@@ -97,8 +115,16 @@ class BusinessesViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView() // don't show empt cells
         
+        refreshControl.addTarget(self, action: #selector(self.loadMoreData(sender:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
         referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
         referenceCell.frame = tableView.frame // tableView.estimatedRowHeight = 120
+    }
+    
+    @objc private func loadMoreData(sender: UIRefreshControl?) {
+        offset += restaurants.count // get next page of data
+        searchYelp(sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
