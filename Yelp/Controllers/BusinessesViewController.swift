@@ -24,7 +24,7 @@ class BusinessesViewController: UIViewController {
     fileprivate var searchFilter = YelpFilters() {
         didSet {
             if oldValue != searchFilter {
-                print("resetting offset")
+                NSLog("resetting offset")
                 offset = 0 // reset offset
             }
         }
@@ -32,12 +32,13 @@ class BusinessesViewController: UIViewController {
     
     fileprivate let searchIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-//    fileprivate let cellIdentifier = "RestaurantCell"
-    fileprivate let cellIdentifier = "BusinessCell"
+    fileprivate let cellIdentifier = "RestaurantCell"
+//    fileprivate let cellIdentifier = "BusinessCell"
+  
+    fileprivate var referenceCell: RestaurantTableViewCell!
+//    fileprivate var referenceCell: BusinessCell!
     
-    fileprivate var referenceCell: BusinessCell!
-    
-    fileprivate var searchTerm: String = "Chinese"
+    fileprivate var searchTerm: String = "Asian"
     
     fileprivate var offset: Int = 0 // offset search results
     
@@ -108,11 +109,11 @@ class BusinessesViewController: UIViewController {
     
     private func setupTableview() {
         
-//        let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
-//        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
-        
-        let cellNib = UINib(nibName: "BusinessCell", bundle: Bundle.main)
+        let cellNib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
         tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        
+//        let cellNib = UINib(nibName: "BusinessCell", bundle: Bundle.main)
+//        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -123,8 +124,8 @@ class BusinessesViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.loadMoreData(sender:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
-//        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
-        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! BusinessCell!
+        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! RestaurantTableViewCell!
+//        referenceCell = cellNib.instantiate(withOwner: nil, options: nil).first as! BusinessCell!
         referenceCell.frame = tableView.frame // tableView.estimatedRowHeight = 120
     }
     
@@ -172,7 +173,7 @@ extension BusinessesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BusinessCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
         
         cell.restaurant = restaurants[indexPath.row]
         

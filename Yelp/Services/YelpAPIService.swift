@@ -26,14 +26,14 @@ import SwiftyJSON
 import ObjectMapper
 import BDBOAuth1Manager
 
-//let yelpConsumerKey = "vxKwwcR_NMQ7WaEiQBK_CA"
-//let yelpConsumerSecret = "33QCvh5bIF5jIHR5klQr7RtBDhQ"
-//let yelpToken = "uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV"
-//let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
-//
-//enum YelpSortMode: Int {
-//    case bestMatched = 0, distance, highestRated
-//}
+let yelpConsumerKey = "vxKwwcR_NMQ7WaEiQBK_CA"
+let yelpConsumerSecret = "33QCvh5bIF5jIHR5klQr7RtBDhQ"
+let yelpToken = "uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV"
+let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
+
+enum YelpSortMode: Int {
+    case bestMatched = 0, distance, highestRated
+}
 
 typealias CompletionHandler = (_: [Restaurant], _ error: String?, _ statusCode: Int?) -> Void
 class YelpAPIService: BDBOAuth1RequestOperationManager {
@@ -72,7 +72,7 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
         var restaurants: [Restaurant] = []
         
         self.get("search", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: Any) in
-            //                print("response: \(response)")
+            print("response: \(response)")
             let json = JSON(response)
             let businesses = json["businesses"].arrayObject
             if let data = Mapper<Restaurant>().mapArray(JSONObject: businesses) {
@@ -90,48 +90,6 @@ class YelpAPIService: BDBOAuth1RequestOperationManager {
             completionCallback(restaurants, error.localizedDescription, statusCode)
         }
         
-    }
-    
-    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completionCallback: @escaping CompletionHandler) {
-        
-        var restaurants: [Restaurant] = []
-        
-        // Default the location to San Francisco
-        // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
-        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
-        
-        if sort != nil {
-            parameters["sort"] = sort!.rawValue as AnyObject?
-        }
-        
-        if categories != nil && categories!.count > 0 {
-            parameters["category_filter"] = categories!.joined(separator: ",") as AnyObject?
-        }
-        
-        if deals != nil {
-            parameters["deals_filter"] = deals! as AnyObject?
-        }
-        
-        print("params: \(parameters)")
-        
-        self.get("search", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: Any) in
-//                print("response: \(response)")
-            let json = JSON(response)
-            let businesses = json["businesses"].arrayObject
-            if let data = Mapper<Restaurant>().mapArray(JSONObject: businesses) {
-                restaurants = data
-                print("converted restaurants first address: \(restaurants.first?.address.joined(separator: ", "))")
-                completionCallback(restaurants, nil, nil)
-            }
-
-        }) { (operation: AFHTTPRequestOperation?, error: Error) in
-            print("error: \(error)")
-            var statusCode = 400
-            if let res = operation?.response {
-                statusCode = res.statusCode
-            }
-            completionCallback(restaurants, error.localizedDescription, statusCode)
-        }
     }
     
     func yelpCategories() -> [[String:String]] {

@@ -42,7 +42,7 @@ final class YelpFilters: NSObject {
                         Option(label: "25 Mile", value: "40000", isSelected: false)
                     ],
                    allowMultiSelect: false,
-                   isCollapsed: true,
+                   isCollapsed: false,
                    cellType: .optionCell),
             
             Filter(label: "Sort by",
@@ -55,7 +55,7 @@ final class YelpFilters: NSObject {
                     Option(label: "Rating", value: YelpSortMode.highestRated.rawValue.description, isSelected: false)
                 ],
                    allowMultiSelect: false,
-                   isCollapsed: true,
+                   isCollapsed: false,
                    cellType: .optionCell),
             
             Filter(label: "Categories",

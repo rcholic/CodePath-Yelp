@@ -16,7 +16,7 @@ class Restaurant: BaseJsonModel {
     var imageUrl: String?
     var categories: [[String]] = []
     var location: Location? = nil
-    var distance: String?
+    var distance: Float?
     var ratingImageUrl: String?
     var reviewCount: Int?
     var rating: Float?

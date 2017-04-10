@@ -42,6 +42,12 @@ class RestaurantTableViewCell: UITableViewCell {
         nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     }
     
+    private func randomPriceyness() -> String {
+        let priceyness: [String] = ["$", "$$", "$$$", "$$$$"]
+        let randomIndex = Int(arc4random_uniform(UInt32(priceyness.count)))
+        return priceyness[randomIndex]
+    }
+    
     private func bind(_ restaurant: Restaurant) {
         
         self.thumbImageView.fadeInImageWith(remoteImgUrl: restaurant.imageUrl, placeholderImage: nil)
@@ -50,7 +56,10 @@ class RestaurantTableViewCell: UITableViewCell {
             self.nameLabel.text = name
         }
         
-        self.distanceLabel.text = restaurant.distance ?? ""
+        if let dist = restaurant.distance {
+            let miles = Double(dist) * milesPerMeter
+            distanceLabel.text = "\(String(format: "%.2f", miles)) mi"
+        }
         
         if let urlString = restaurant.ratingImageUrl {
             self.ratingImageView.setImageWith(URL(string: urlString)!)
@@ -67,6 +76,8 @@ class RestaurantTableViewCell: UITableViewCell {
         self.addressLabel.text = restaurant.address.joined(separator: ", ")
         
         self.categoryLabel.text = restaurant.categories.first?.joined(separator: ", ")
+        
+        priceyLabel.text = randomPriceyness()
     }
     
 }

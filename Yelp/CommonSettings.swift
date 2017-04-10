@@ -8,6 +8,8 @@
 
 import UIKit
 
+public let milesPerMeter = 0.000621371
+
 public let checkedImage = UIImage(named: "checked")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 
 public let uncheckedImage = UIImage(named: "unchecked")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)

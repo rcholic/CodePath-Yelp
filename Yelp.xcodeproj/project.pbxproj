@@ -14,8 +14,6 @@
 		31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */; };
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
 		EB27E20B1E9742B1006204F7 /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27E20A1E9742B1006204F7 /* BusinessesViewController.swift */; };
-		EB27E20E1E9742B8006204F7 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27E20D1E9742B8006204F7 /* Business.swift */; };
-		EB27E2111E9742BE006204F7 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27E2101E9742BE006204F7 /* YelpClient.swift */; };
 		EB27E2141E9742E1006204F7 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB27E2131E9742E1006204F7 /* AFNetworking.framework */; };
 		EB27E2161E9742E5006204F7 /* BDBOAuth1Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB27E2151E9742E5006204F7 /* BDBOAuth1Manager.framework */; };
 		EB27E2181E9742EA006204F7 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB27E2171E9742EA006204F7 /* ObjectMapper.framework */; };
@@ -65,8 +63,6 @@
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB27E20A1E9742B1006204F7 /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
-		EB27E20D1E9742B8006204F7 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
-		EB27E2101E9742BE006204F7 /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		EB27E2131E9742E1006204F7 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "Pods/../build/Release-iphoneos/AFNetworking/AFNetworking.framework"; sourceTree = "<group>"; };
 		EB27E2151E9742E5006204F7 /* BDBOAuth1Manager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BDBOAuth1Manager.framework; path = "Pods/../build/Release-iphoneos/BDBOAuth1Manager/BDBOAuth1Manager.framework"; sourceTree = "<group>"; };
 		EB27E2171E9742EA006204F7 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "Pods/../build/Release-iphoneos/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
@@ -210,7 +206,6 @@
 		EB27E20C1E9742B8006204F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EB27E20D1E9742B8006204F7 /* Business.swift */,
 				EB27E21E1E9743D6006204F7 /* Restaurant.swift */,
 				EB27E2201E9743EC006204F7 /* BaseJsonModel.swift */,
 				EB6C24E61E9957CF00EF12D6 /* Filter.swift */,
@@ -224,7 +219,6 @@
 		EB27E20F1E9742BE006204F7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				EB27E2101E9742BE006204F7 /* YelpClient.swift */,
 				EB709C8E1E986C6800CA6AA8 /* YelpAPIService.swift */,
 			);
 			path = Services;
@@ -468,10 +462,8 @@
 				EB709C941E988B8500CA6AA8 /* UIImageView+Ext.swift in Sources */,
 				EB709C8F1E986C6800CA6AA8 /* YelpAPIService.swift in Sources */,
 				EB27E21F1E9743D6006204F7 /* Restaurant.swift in Sources */,
-				EB27E2111E9742BE006204F7 /* YelpClient.swift in Sources */,
 				EB71844E1E9AD4DF009DDEAF /* CommonSettings.swift in Sources */,
 				EB27E2211E9743EC006204F7 /* BaseJsonModel.swift in Sources */,
-				EB27E20E1E9742B8006204F7 /* Business.swift in Sources */,
 				EB71844A1E9A7C25009DDEAF /* Location.swift in Sources */,
 				EB71844C1E9AD3FF009DDEAF /* Option.swift in Sources */,
 				EB7184551E9B0EA7009DDEAF /* BusinessCell.swift in Sources */,

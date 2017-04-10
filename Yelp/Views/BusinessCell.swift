@@ -20,8 +20,6 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     
-    let priceyness: [String] = ["$", "$$", "$$$", "$$$$"]
-
     var restaurant: Restaurant! {
         didSet {
             self.bind(restaurant)
@@ -92,6 +90,7 @@ class BusinessCell: UITableViewCell {
     }
     
     private func randomPriceyness() -> String {
+        let priceyness: [String] = ["$", "$$", "$$$", "$$$$"]
         let randomIndex = Int(arc4random_uniform(UInt32(priceyness.count)))
         return priceyness[randomIndex]
     }
@@ -104,7 +103,10 @@ class BusinessCell: UITableViewCell {
             nameLabel.text = name
         }
         
-        distanceLabel.text = restaurant.distance ?? ""
+        if let dist = restaurant.distance {
+            let miles = Double(dist) * milesPerMeter
+            distanceLabel.text = "\(String(format: "%.2f", miles)) mi"
+        }
         
         if let urlString = restaurant.ratingImageUrl {
             ratingImageView.setImageWith(URL(string: urlString)!)
