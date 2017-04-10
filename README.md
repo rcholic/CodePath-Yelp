@@ -37,6 +37,7 @@ The following **additional** features are implemented:
 - [x] Collapsible dropdown views for single selection of *Distance* and *Sort by* in the Filters screen
 - [x] Search activity indicator when the *UISearchBar* is performing search
 - [x] Using a throttle mechanism to control the frequency of API calls to Yelp. The search is delayed by 0.5 second when text is changed in the search bar, this improves user experience and also reduces the unnecessary number of API calls for every single text change event
+- [x] Search results pagination using Pull-to-refresh
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
