@@ -53,6 +53,8 @@ class BusinessesViewController: UIViewController {
         setupTableview()
 //        search(term: searchTerm, params: searchFilter.parameters, callback: nil)
         searchYelp(sender: nil)
+        
+        UserLocation.shared.requestLocation()
     }
     
     @objc fileprivate func searchYelp(sender: AnyObject?) {
